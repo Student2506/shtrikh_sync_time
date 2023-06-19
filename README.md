@@ -8,8 +8,12 @@
 
 ## Инсталляция  
 1. Создать окружение  
-> python -m venv venv  
-> source venv/bin/activate  
-2. Установить зависимости  
-> python -m pip install --upgrade pip  
-> pip install -r requirements.txt  
+```bash
+python -m venv venv  
+source venv/bin/activate  
+```
+3. Установить зависимости  
+```bash
+python -m pip install --upgrade pip  
+pip install -r requirements.txt  
+```
