@@ -21,9 +21,7 @@ class MyService:
         self.running = True
         while self.running:
             logging.basicConfig(level=logging.DEBUG, format=FORMAT)
-            drvfr = win32com.client.Dispatch(
-                'AddIn.Drvfr', pythoncom.CoInitialize()
-            )
+            drvfr = win32com.client.Dispatch('AddIn.Drvfr', pythoncom.CoInitialize())
             drvfr.GetCountLD()
             ld_numbers = []
             for i in range(drvfr.LDCount):
@@ -31,16 +29,12 @@ class MyService:
                 drvfr.EnumLD()
                 ld_numbers.append(drvfr.LDNumber)
 
-            servicemanager.LogInfoMsg(
-                f'Текущее число принтеров: {drvfr.LDCount}'
-            )
+            servicemanager.LogInfoMsg(f'Текущее число принтеров: {drvfr.LDCount}')
             for i in ld_numbers:
                 drvfr.LDNumber = i
                 drvfr.SetActiveLD()
                 drvfr.Connect2()
-                servicemanager.LogInfoMsg(
-                    f'Код соединения: {drvfr.ResultCode}'
-                )
+                servicemanager.LogInfoMsg(f'Код соединения: {drvfr.ResultCode}')
                 if drvfr.ResultCode:
                     continue
                 drvfr.Password = 30
@@ -74,7 +68,7 @@ class MyServiceFramework(win32serviceutil.ServiceFramework):
         self.service_impl.run()
 
 
-def init():
+def main():
     if len(sys.argv) == 1:
         servicemanager.Initialize()
         servicemanager.PrepareToHostSingle(MyServiceFramework)
@@ -84,4 +78,4 @@ def init():
 
 
 if __name__ == '__main__':
-    init()
+    main()
