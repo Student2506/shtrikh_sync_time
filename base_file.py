@@ -68,7 +68,7 @@ class MyServiceFramework(win32serviceutil.ServiceFramework):
         self.service_impl.run()
 
 
-def main():
+def init():
     if len(sys.argv) == 1:
         servicemanager.Initialize()
         servicemanager.PrepareToHostSingle(MyServiceFramework)
@@ -78,4 +78,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    init()
